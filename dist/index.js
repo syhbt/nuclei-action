@@ -6813,7 +6813,8 @@ async function downloadAndInstall(selectedVersion) {
 		throw new Error(`Unable to download Nuclei from ${url}.`);
 	}
 
-	const installDir = await tool_cache.extractZip(downloadDir);
+	const extractDir = process.env.GITHUB_WORKSPACE;
+	const installDir = await tool_cache.extractZip(downloadDir, extractDir);
 	if (installDir == null) {
 		throw new Error("Unable to extract Nuclei.");
 	}
@@ -6825,6 +6826,7 @@ async function downloadAndInstall(selectedVersion) {
 	core.endGroup();
 	return binPath
 }
+
 ;// CONCATENATED MODULE: ./node_modules/js-yaml/dist/js-yaml.mjs
 
 /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */

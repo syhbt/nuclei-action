@@ -51,7 +51,8 @@ export async function downloadAndInstall(selectedVersion) {
 		throw new Error(`Unable to download Nuclei from ${url}.`);
 	}
 
-	const installDir = await tc.extractZip(downloadDir);
+	const extractDir = process.env.GITHUB_WORKSPACE;
+	const installDir = await tc.extractZip(downloadDir, extractDir);
 	if (installDir == null) {
 		throw new Error("Unable to extract Nuclei.");
 	}
